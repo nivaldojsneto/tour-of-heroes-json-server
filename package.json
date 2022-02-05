@@ -5,7 +5,7 @@
   "main": "api/index.js",
   "scripts": {
     "server": "nodemon server.js",
-    "start": "json-server --watch ./api/db.json --port 3001 --routes ./api/routes.json --delay 500",
+    "start": "json-server --watch ./api/db.json --port 3001 --routes ./api/routes.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,7 +20,9 @@
   },
   "homepage": "https://github.com/nivaldojsneto/tour-of-heroes-json-server#readme",
   "dependencies": {
-    "json-server": "^0.17.0"
+    "cors": "^2.8.5",
+    "json-server": "^0.17.0",
+    "vercel": "^23.1.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
