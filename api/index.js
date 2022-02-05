@@ -1,23 +1,12 @@
 const jsonServer = require('json-server');
-const app = jsonServer.create();
 const path = require('path');
+const server = jsonServer.create();
 const router = jsonServer.router(path.join(__dirname, 'db.json'));
 const middlewares = jsonServer.defaults();
-const port = process.env.PORT || 3001;
 
-app.use(middlewares);
+server.use(jsonServer.bodyParser);
+server.use(middlewares);
 
-app.use(
-  jsonServer.rewriter({
-    '/api/*': '/$1',
-    '/heroes\\?name=:term': '/heroes?q=:term',
-  }),
-);
+server.use(router);
 
-app.use(router);
-
-app.listen(port, () => {
-  console.log('JSON Server is running on port', port);
-});
-
-module.exports = app;
+server.listen(3000, () => console.log('JSON Server is running'));

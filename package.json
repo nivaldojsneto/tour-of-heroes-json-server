@@ -2,10 +2,11 @@
   "name": "tour-of-heroes-json-server",
   "version": "1.0.0",
   "description": "Json Server to mock data from Tour Of Heroes Angular 13 repository",
-  "main": "index.js",
+  "main": "api/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon api/index"
+    "server": "nodemon server.js",
+    "start": "json-server --watch ./api/db.json --port 3001 --routes ./api/routes.json --delay 500",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
