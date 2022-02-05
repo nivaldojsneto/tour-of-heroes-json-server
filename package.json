@@ -1,0 +1,27 @@
+{
+  "name": "tour-of-heroes-json-server",
+  "version": "1.0.0",
+  "description": "Json Server to mock data from Tour Of Heroes Angular 13 repository",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon api/index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nivaldojsneto/tour-of-heroes-json-server.git"
+  },
+  "keywords": [],
+  "author": "Nivaldo Neto @nivaldojsneto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nivaldojsneto/tour-of-heroes-json-server/issues"
+  },
+  "homepage": "https://github.com/nivaldojsneto/tour-of-heroes-json-server#readme",
+  "dependencies": {
+    "json-server": "^0.17.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
