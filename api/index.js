@@ -1,14 +1,31 @@
-const jsonServer = require('json-server');
-const path = require('path');
-const server = jsonServer.create();
-const router = jsonServer.router(path.join(__dirname, 'db.json'));
-const middlewares = jsonServer.defaults();
+var jsonServer = require('json-server');
+var db = require('./db.js');
+var fs = require('fs');
 const cors = require('cors');
 
-server.use(jsonServer.bodyParser);
+var server = jsonServer.create();
+
+// important to do this for now.sh to work
+// https://spectrum.chat/zeit/general/how-do-i-upload-a-file-to-the-tmp-directory~a1548ae0-91b1-42f5-9388-c79673ba09e4
+fs.writeFileSync('/tmp/db.json', JSON.stringify(db()));
+
+// important to have /tmp here otherwise now.sh won't write to file
+// https://stackoverflow.com/questions/43389724/lambda-function-error-erofs-read-only-file-system-open-tmp-test-zip-proc
+var router = jsonServer.router('/tmp/db.json');
+var middlewares = jsonServer.defaults();
+var port = process.env.PORT || 5000;
+
+server.use(
+  cors({
+    origin: true,
+    credentials: true,
+    preflightContinue: false,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  }),
+);
+server.options('*', cors());
 server.use(middlewares);
-server.use(cors());
-
 server.use(router);
-
-server.listen(3001, () => console.log('JSON Server is running'));
+server.listen(port, function () {
+  console.log('JSON Server is running on http://localhost:' + port);
+});
